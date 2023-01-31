@@ -16,7 +16,7 @@ namespace Ui
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
-            _view.Init(SettingsGame);
+            _view.Init(BackInMenu);
         }
 
         private SettingsMenuView LoadView(Transform placeForUi)
@@ -28,7 +28,7 @@ namespace Ui
             return objectView.GetComponent<SettingsMenuView>();
         }
 
-        private void SettingsGame() =>
-            _profilePlayer.CurrentState.Value = GameState.Settings;
+        private void BackInMenu() =>
+            _profilePlayer.CurrentState.Value = GameState.Start;
     }
 }
