@@ -9,6 +9,7 @@ internal class MainController : BaseController
     private readonly ProfilePlayer _profilePlayer;
 
     private MainMenuController _mainMenuController;
+    private SettingsMenuController _settingsMenuController;
     private GameController _gameController;
 
 
@@ -24,6 +25,7 @@ internal class MainController : BaseController
     protected override void OnDispose()
     {
         _mainMenuController?.Dispose();
+        _settingsMenuController?.Dispose();
         _gameController?.Dispose();
 
         _profilePlayer.CurrentState.UnSubscribeOnChange(OnChangeGameState);
@@ -37,18 +39,22 @@ internal class MainController : BaseController
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
                 _gameController?.Dispose();
+                _settingsMenuController?.Dispose();
                 break;
             case GameState.Settings:
-                _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
+                _settingsMenuController = new SettingsMenuController(_placeForUi, _profilePlayer);
+                _mainMenuController?.Dispose();
                 _gameController?.Dispose();
                 break;
             case GameState.Game:
                 _gameController = new GameController(_profilePlayer);
                 _mainMenuController?.Dispose();
+                _settingsMenuController?.Dispose();
                 break;
             default:
                 _mainMenuController?.Dispose();
                 _gameController?.Dispose();
+                _settingsMenuController?.Dispose();
                 break;
         }
     }
