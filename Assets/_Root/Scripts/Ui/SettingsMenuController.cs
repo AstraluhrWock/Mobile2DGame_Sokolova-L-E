@@ -11,7 +11,6 @@ namespace Ui
         private readonly ProfilePlayer _profilePlayer;
         private readonly SettingsMenuView _view;
 
-
         public SettingsMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
         {
             _profilePlayer = profilePlayer;

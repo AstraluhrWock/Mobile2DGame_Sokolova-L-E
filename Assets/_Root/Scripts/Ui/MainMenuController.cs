@@ -16,7 +16,7 @@ namespace Ui
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
-            _view.Init(StartGame, SettingsGame);
+            _view.Init(StartGame, SettingsGame, BuyItem, ExitGame);
             
         }
 
@@ -34,5 +34,11 @@ namespace Ui
 
        private void SettingsGame() =>
             _profilePlayer.CurrentState.Value = GameState.Settings;
+
+        private void BuyItem() =>
+            _profilePlayer.CurrentState.Value = GameState.Buy;
+
+        private void ExitGame() =>
+            _profilePlayer.CurrentState.Value = GameState.Exit;
     }
 }
