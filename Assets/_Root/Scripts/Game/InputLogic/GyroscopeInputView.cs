@@ -11,9 +11,11 @@ namespace Game.InputLogic
         public override void Init(
             SubscriptionProperty<float> leftMove,
             SubscriptionProperty<float> rightMove,
-            float speed)
+            SubscriptionProperty<float> jumpMove,
+            float speed,
+            float jump)
         {
-            base.Init(leftMove, rightMove, speed);
+            base.Init(leftMove, rightMove, jumpMove, speed, jump);
             Input.gyro.enabled = true;
         }
 
