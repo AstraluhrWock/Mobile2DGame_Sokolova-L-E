@@ -10,30 +10,34 @@ namespace Game.TapeBackground
         private readonly SubscriptionProperty<float> _diff;
         private readonly ISubscriptionProperty<float> _leftMove;
         private readonly ISubscriptionProperty<float> _rightMove;
-
+        private readonly ISubscriptionProperty<float> _upMove;
         private TapeBackgroundView _view;
 
 
         public TapeBackgroundController(
             SubscriptionProperty<float> leftMove,
-            SubscriptionProperty<float> rightMove)
+            SubscriptionProperty<float> rightMove,
+            SubscriptionProperty<float> upMove)
         {
             _view = LoadView();
             _diff = new SubscriptionProperty<float>();
 
             _leftMove = leftMove;
             _rightMove = rightMove;
+            _upMove = upMove;
 
             _view.Init(_diff);
 
             _leftMove.SubscribeOnChange(MoveLeft);
             _rightMove.SubscribeOnChange(MoveRight);
+            _upMove.SubscribeOnChange(UpMove);
         }
 
         protected override void OnDispose()
         {
             _leftMove.UnSubscribeOnChange(MoveLeft);
             _rightMove.UnSubscribeOnChange(MoveRight);
+            _upMove.UnSubscribeOnChange(UpMove);
         }
 
 
@@ -50,6 +54,10 @@ namespace Game.TapeBackground
             _diff.Value = -value;
 
         private void MoveRight(float value) =>
+            _diff.Value = value;
+
+        // TODO: значение для прыжка
+        private void UpMove(float value) =>
             _diff.Value = value;
     }
 }

@@ -13,9 +13,10 @@ namespace Game.InputLogic
             SubscriptionProperty<float> rightMove,
             SubscriptionProperty<float> jumpMove,
             float speed,
-            float jump)
+            float jump
+            )
         {
-            base.Init(leftMove, rightMove, jumpMove, speed, jump);
+            base.Init(leftMove, rightMove, jumpMove , speed, jump);
             Input.gyro.enabled = true;
         }
 

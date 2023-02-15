@@ -14,7 +14,7 @@ namespace Game
             var rightMoveDiff = new SubscriptionProperty<float>();
             var upMoveDiff = new SubscriptionProperty<float>();
 
-            var tapeBackgroundController = new TapeBackgroundController(leftMoveDiff, rightMoveDiff);
+            var tapeBackgroundController = new TapeBackgroundController(leftMoveDiff, rightMoveDiff, upMoveDiff);
             AddController(tapeBackgroundController);
 
             var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, upMoveDiff, profilePlayer.CurrentCar);

@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4864c3e4a45846c1a3db6f6dfb3c105b, type: 3}
   m_Name: UnityAdsSettings
   m_EditorClassIdentifier: 
-  _androidGameId: 
-  _iOsGameId: 
+  _androidGameId: 5147014
+  _iOsGameId: 5147014
   <Interstitial>k__BackingField:
     <Enabled>k__BackingField: 0
     _androidId: 
     _iosId: 
   <Rewarded>k__BackingField:
-    <Enabled>k__BackingField: 0
-    _androidId: 
-    _iosId: 
+    <Enabled>k__BackingField: 1
+    _androidId: Interstitial_Android
+    _iosId: Interstitial_iOS
   <Banner>k__BackingField:
     <Enabled>k__BackingField: 0
     _androidId: 

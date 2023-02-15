@@ -6,7 +6,7 @@ namespace Profile
         Start,
         Settings,
         Game,
-        Buy,
+        Shed,
         Exit
     }
 }

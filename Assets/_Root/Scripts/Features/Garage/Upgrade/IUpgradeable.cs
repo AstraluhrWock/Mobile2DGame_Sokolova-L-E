@@ -4,7 +4,7 @@ namespace Feature.Shed.Upgrade
     {
         float Speed { get; set; }
 
-        float Jump { get; set; }
+       // float Jump { get; set; }
         void Restore();
     }
 }

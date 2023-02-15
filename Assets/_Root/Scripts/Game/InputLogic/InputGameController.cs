@@ -7,7 +7,7 @@ namespace Game.InputLogic
     internal class InputGameController : BaseController
     {
         //private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/EndlessMove");
-        private readonly ResourcePath _resourcePrefab = new ResourcePath("Prefabs/KeyboardInput");
+        private readonly ResourcePath _resourcePrefab = new ResourcePath("Prefabs/Input/KeyboardInput");
         private BaseInputView _view;
 
 
@@ -18,7 +18,7 @@ namespace Game.InputLogic
             CarModel car)
         {
             _view = LoadView();
-            _view.Init(leftMove, rightMove, upMove, car.Speed, car.Jump);
+            _view.Init(leftMove, rightMove, upMove ,car.Speed, car.Jump);
         }
 
  

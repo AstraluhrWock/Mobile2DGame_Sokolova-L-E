@@ -8,13 +8,11 @@ namespace Game.InputLogic
     {
         [SerializeField] private float _inputMultiplier = 10;
         [SerializeField] private float _jumpForce = 1;
-        private Rigidbody2D _rigidbody;
 
 
         private void Start() 
         {
             UpdateManager.SubscribeToUpdate(Move);
-            _rigidbody = GetComponent<Rigidbody2D>();
         }
 
         private void OnDestroy() =>
@@ -22,22 +20,18 @@ namespace Game.InputLogic
 
 
         private void Move()
-        {
-            float axisXset = CrossPlatformInputManager.GetAxis("Horizontal");
-         
-            float moveValue = _inputMultiplier * Time.deltaTime * axisXset;
-            float abs = Mathf.Abs(moveValue);
+        {         
+            float moveValue = _speed * _inputMultiplier * Time.deltaTime;
 
+            if (Input.GetKey(KeyCode.RightArrow))
+                OnRightMove(moveValue);
 
+            if (Input.GetKey(KeyCode.LeftArrow))
+                OnLeftMove(moveValue);
 
-            if (Input.GetKey("right"))
-                OnRightMove(abs);
-
-            else if (Input.GetKey("left"))
-                OnLeftMove(abs);
-
-            else if (Input.GetKey("up"))
-                _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            if (Input.GetKey(KeyCode.UpArrow))
+                OnJumpMove(_jumpForce);
+               
         }
     }
 }

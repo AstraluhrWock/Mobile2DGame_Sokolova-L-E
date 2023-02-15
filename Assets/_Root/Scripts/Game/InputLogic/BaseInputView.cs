@@ -17,7 +17,8 @@ namespace Game.InputLogic
             SubscriptionProperty<float> rightMove,
             SubscriptionProperty<float> upMove,
             float speed,
-            float jump)
+            float jump
+           )
         {
             _leftMove = leftMove;
             _rightMove = rightMove;

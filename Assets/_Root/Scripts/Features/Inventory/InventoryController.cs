@@ -8,10 +8,13 @@ using Object = UnityEngine.Object;
 
 namespace Feature.Inventory
 {
-    internal class InventoryController : BaseController
+    internal interface IIventoryController
+    { }
+
+    internal class InventoryController : BaseController, IIventoryController
     {
-        private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Inventory/ItemView");
-        private readonly ResourcePath _dataSourcePath = new ResourcePath("Prefabs/Inventory/InventoryView");
+        private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Inventory/InventoryView");
+        private readonly ResourcePath _dataSourcePath = new ResourcePath("ScriptableObject/Config/Items/ItemConfigDataSource");
 
         private readonly IInventoryView _view;
         private readonly IInventoryModel _model;
