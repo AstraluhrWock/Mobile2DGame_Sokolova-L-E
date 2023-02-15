@@ -7,28 +7,31 @@ namespace Game.InputLogic
     internal class KeyboardInput : BaseInputView
     {
         [SerializeField] private float _inputMultiplier = 10;
+        [SerializeField] private float _jumpForce = 1;
 
 
-        private void Start() =>
+        private void Start() 
+        {
             UpdateManager.SubscribeToUpdate(Move);
+        }
 
         private void OnDestroy() =>
             UpdateManager.UnsubscribeFromUpdate(Move);
 
 
         private void Move()
-        {
-            float axisOffset = CrossPlatformInputManager.GetAxis("Horizontal");
-            float moveValue = _inputMultiplier * Time.deltaTime * axisOffset;
+        {         
+            float moveValue = _speed * _inputMultiplier * Time.deltaTime;
 
-            float abs = Mathf.Abs(moveValue);
-            float sign = Mathf.Sign(moveValue);
+            if (Input.GetKey(KeyCode.RightArrow))
+                OnRightMove(moveValue);
 
-            if (Input.GetKey("right"))
-                OnRightMove(abs);
+            if (Input.GetKey(KeyCode.LeftArrow))
+                OnLeftMove(moveValue);
 
-            else if (Input.GetKey("left"))
-                OnLeftMove(abs);
+            if (Input.GetKey(KeyCode.UpArrow))
+                OnJumpMove(_jumpForce);
+               
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Ui
 {
     internal class MainMenuController : BaseController
     {
-        private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/MainMenu");
+        private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/UI/MainMenu");
         private readonly ProfilePlayer _profilePlayer;
         private readonly MainMenuView _view;
 
@@ -16,7 +16,7 @@ namespace Ui
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
-            _view.Init(StartGame, SettingsGame);
+            _view.Init(StartGame, SettingsGame, OpenShed, ExitGame);
             
         }
 
@@ -34,5 +34,11 @@ namespace Ui
 
        private void SettingsGame() =>
             _profilePlayer.CurrentState.Value = GameState.Settings;
+
+        private void OpenShed() =>
+            _profilePlayer.CurrentState.Value = GameState.Shed;
+
+        private void ExitGame() =>
+            _profilePlayer.CurrentState.Value = GameState.Exit;
     }
 }
