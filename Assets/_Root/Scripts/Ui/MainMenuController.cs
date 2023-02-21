@@ -10,15 +10,18 @@ namespace Ui
         private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/UI/MainMenu");
         private readonly ProfilePlayer _profilePlayer;
         private readonly MainMenuView _view;
+        private readonly CustomLogger _logger;
 
 
         public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
         {
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
+            _logger = LoggerFactory.Create<MainMenuController>();
             _view.Init(StartGame, SettingsGame, OpenShed, ExitGame);
-            
+
         }
+
 
         private MainMenuView LoadView(Transform placeForUi)
         {
@@ -40,5 +43,12 @@ namespace Ui
 
         private void ExitGame() =>
             _profilePlayer.CurrentState.Value = GameState.Exit;
+
+        private void OnAdsFinished() => _logger.Log("You've received a reward for ads!");
+        private void OnAdsCancelled() => _logger.Log("Receiving a reward for ads has been interrupted!");
+
+        private void OnIAPSucceed() => _logger.Log("Purchase succeed");
+        private void OnIAPFailed() => _logger.Log("Purchase failed");
+
     }
 }

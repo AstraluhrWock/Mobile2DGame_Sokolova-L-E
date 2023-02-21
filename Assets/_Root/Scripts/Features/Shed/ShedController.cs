@@ -6,6 +6,8 @@ using UnityEngine;
 using Feature.Inventory;
 using Feature.Shed.Upgrade;
 using JetBrains.Annotations;
+using Feature.Inventory.Items;
+using Object = UnityEngine.Object;
 
 namespace Feature.Shed
 {
@@ -20,8 +22,9 @@ namespace Feature.Shed
 
         private readonly ShedView _view;
         private readonly ProfilePlayer _profilePlayer;
-        private readonly InventoryController _inventoryController;
         private readonly UpgradeHandlersRepository _upgradeHandlersRepository;
+        private readonly CustomLogger _logger;
+        private readonly InventoryContext _inventoryContext;
 
 
         public ShedController(
@@ -34,13 +37,21 @@ namespace Feature.Shed
             _profilePlayer
                 = profilePlayer ?? throw new ArgumentNullException(nameof(profilePlayer));
 
+            _logger = LoggerFactory.Create<ShedController>();
             _upgradeHandlersRepository = CreateRepository();
-            _inventoryController = CreateInventoryController(placeForUi);
+            _inventoryContext = CreateInventoryContext(placeForUi, _profilePlayer.Inventory);
             _view = LoadView(placeForUi);
 
             _view.Init(Apply, Back);
         }
 
+        private InventoryContext CreateInventoryContext(Transform placeForUI, IInventoryModel profilePlayerInventory)
+        {
+            var inventoryContext = new InventoryContext(placeForUI, profilePlayerInventory);
+            AddContext(inventoryContext);
+
+            return inventoryContext;
+        }
 
         private UpgradeHandlersRepository CreateRepository()
         {
@@ -49,14 +60,6 @@ namespace Feature.Shed
             AddRepositories(repository);
 
             return repository;
-        }
-
-        private InventoryController CreateInventoryController(Transform placeForUi)
-        {
-            var inventoryController = new InventoryController(placeForUi, _profilePlayer.Inventory);
-            AddController(inventoryController);
-
-            return inventoryController;
         }
 
         private ShedView LoadView(Transform placeForUi)
@@ -79,13 +82,13 @@ namespace Feature.Shed
                 _upgradeHandlersRepository.Items);
 
             _profilePlayer.CurrentState.Value = GameState.Start;
-            Log($"Apply. Current Speed: {_profilePlayer.CurrentCar.Speed}");
+            _logger.Log($"Apply. Current Speed: {_profilePlayer.CurrentCar.Speed}");
         }
 
         private void Back()
         {
             _profilePlayer.CurrentState.Value = GameState.Start;
-            Log($"Back. Current Speed: {_profilePlayer.CurrentCar.Speed}");
+            _logger.Log($"Back. Current Speed: {_profilePlayer.CurrentCar.Speed}");
         }
 
 
@@ -102,4 +105,5 @@ namespace Feature.Shed
         private void Log(string message) =>
             Debug.Log($"[{GetType().Name}] {message}");
     }
+
 }
