@@ -2,6 +2,7 @@ using Profile;
 using Tool;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Services;
 
 namespace Ui
 {
@@ -18,7 +19,7 @@ namespace Ui
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
             _logger = LoggerFactory.Create<MainMenuController>();
-            _view.Init(StartGame, SettingsGame, OpenShed, ExitGame);
+            _view.Init(StartGame, SettingsGame, OpenShed, PlayRewardedAds, BuyProduct, OpenDailyReward, ExitGame);
 
         }
 
@@ -41,8 +42,21 @@ namespace Ui
         private void OpenShed() =>
             _profilePlayer.CurrentState.Value = GameState.Shed;
 
-        private void ExitGame() =>
+        private void PlayRewardedAds() =>
+           ServiceRoster.AdsService.RewardedPlayer.Play();
+
+        private void BuyProduct(string productId) =>
+          ServiceRoster.IAPService.Buy(productId);
+
+        private void OpenDailyReward() =>
+           _profilePlayer.CurrentState.Value = GameState.DailyReward;
+
+        private void ExitGame()
+        {
             _profilePlayer.CurrentState.Value = GameState.Exit;
+            UnityEditor.EditorApplication.isPlaying = false;
+            Application.Quit();
+        }
 
         private void OnAdsFinished() => _logger.Log("You've received a reward for ads!");
         private void OnAdsCancelled() => _logger.Log("Receiving a reward for ads has been interrupted!");
