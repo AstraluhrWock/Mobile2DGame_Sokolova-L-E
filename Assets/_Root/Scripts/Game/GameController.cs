@@ -5,6 +5,7 @@ using Profile;
 using Tool;
 using UnityEngine;
 using Feature.AbilitySystem;
+using Ui;
 
 namespace Game
 {
@@ -17,6 +18,7 @@ namespace Game
         private readonly CarController _carController;
         private readonly InputGameController _inputGameController;
         private readonly TapeBackgroundController _tapeBackground;
+        private readonly GameMenuController _gameMenuController;
         private readonly AbilitiesContext _abilitiesControllerContext; 
        
 
@@ -29,7 +31,9 @@ namespace Game
             _carController = CreateCarController();
             _inputGameController = CreateInputGameController(_leftMoveDiff, _rightMoveDiff, _upMoveDiff, profilePlayer);
             _abilitiesControllerContext = CreateAbilitiesContext(placeForUI, _carController);
-            _tapeBackground = CreateTapeBackground(_leftMoveDiff, _rightMoveDiff, _upMoveDiff); ;
+            _tapeBackground = CreateTapeBackground(_leftMoveDiff, _rightMoveDiff, _upMoveDiff);
+            _gameMenuController = CreateGameMenuController(placeForUI, profilePlayer);
+
         }
 
         private AbilitiesContext CreateAbilitiesContext(Transform placeForUI, IAbilityActivator abilityActivator)
@@ -77,6 +81,14 @@ namespace Game
             AddController(carController);
 
             return carController;
+        }
+
+        private GameMenuController CreateGameMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
+        {
+            var gameMenuController = new GameMenuController(placeForUi, profilePlayer);
+            AddController(gameMenuController);
+
+            return gameMenuController;
         }
     }
 }

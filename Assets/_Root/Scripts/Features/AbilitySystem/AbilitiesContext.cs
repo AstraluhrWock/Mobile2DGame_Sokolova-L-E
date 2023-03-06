@@ -4,6 +4,7 @@ using Feature.AbilitySystem.Abilities;
 using Tool;
 using JetBrains.Annotations;
 using System;
+using Object = UnityEngine.Object;
 
 namespace Feature.AbilitySystem
 {
@@ -24,7 +25,7 @@ namespace Feature.AbilitySystem
         {
             IAbilitiesView view = LoadView(placeForUI);
             AbilityItemConfig[] itemConfigs = LoadAbilityItemConfigs();
-            IAbilitiesRepository repository = CreateRepository(itemConfigs);
+            AbilitiesRepository repository = CreateRepository(itemConfigs);
 
             var abilitiesController = new AbilitiesController(view, repository, itemConfigs, abilityActivator);
             AddController(abilitiesController);
@@ -34,7 +35,7 @@ namespace Feature.AbilitySystem
         private AbilityItemConfig[] LoadAbilityItemConfigs() =>
             ContentDataSourceLoader.LoadAbilityItemConfigs(_dataSourcePath);
 
-        private IAbilitiesRepository CreateRepository(AbilityItemConfig[] abilityItemConfigs)
+        private AbilitiesRepository CreateRepository(AbilityItemConfig[] abilityItemConfigs)
         {
             var repository = new AbilitiesRepository(abilityItemConfigs);
             AddRepositories(repository);
@@ -45,7 +46,7 @@ namespace Feature.AbilitySystem
         private AbilitiesView LoadView(Transform placeForUi)
         {
             GameObject prefab = ResourcesLoader.LoadPrefab(_viewPath);
-            GameObject objectView = UnityEngine.Object.Instantiate(prefab, placeForUi, false);
+            GameObject objectView = Object.Instantiate(prefab, placeForUi, false);
             AddGameObject(objectView);
 
             return objectView.GetComponent<AbilitiesView>();
