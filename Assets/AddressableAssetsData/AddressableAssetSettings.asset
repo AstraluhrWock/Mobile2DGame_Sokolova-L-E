@@ -43,6 +43,10 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 644fedb075d6bbb41b6562e444e1b675, type: 2}
   - {fileID: 11400000, guid: 5e49f544540c9ad4586f1742f08a981b, type: 2}
+  - {fileID: 11400000, guid: 65677849c13c4c4469bd059165713783, type: 2}
+  - {fileID: 11400000, guid: b6be34357d4161c40a8a120551bf0e98, type: 2}
+  - {fileID: 11400000, guid: 31cc5ccf29b646f4fa9986a68b7a4536, type: 2}
+  - {fileID: 11400000, guid: 94b3d802d8ac09048b8d4bc03c1e4357, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -85,6 +89,10 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - SkySprite
+    - Locale
+    - Locale-en-US
+    - Preload
+    - Locale-ru-RU
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: cc7d4dca177f9d0438e7b95cb0bf6647, type: 2}
